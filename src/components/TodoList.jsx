@@ -6,7 +6,7 @@ const TodoList = () => {
 
   const [todo, setTodo] = useState('');
 
-  const {todos, addTodo, removeTodo}  = useContext(TodoListContext);
+  const {todos, dispatch}  = useContext(TodoListContext);
   // We destructure those states from ThemeContext
   const {isDarkTheme,darkTheme,lightTheme, changeTheme} = useContext(ThemeContext);
   // We check if dark or light
@@ -19,15 +19,15 @@ const TodoList = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if(todo.trim() !== '') {
-      addTodo(todo);
+      dispatch({type: 'ADD_TODO', payload: todo});
       setTodo('');
     } else {
-      // Handle empty form submission, inform user or do nothing.
+      alert("please enter some text");
     }
   };
 
   const handleRemoveTodo = (id) => {
-    removeTodo(id);
+    dispatch({type: 'REMOVE_TODO', id});
   }
 
   return (
